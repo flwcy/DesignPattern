@@ -1,24 +1,3 @@
-<<<<<<< ce04ea1bac9ba7704ecbd11ad19d400e571b4ec8
-jboss/server/all/deploy/project.ext
-jboss/server/default/deploy/project.ext
-jboss/server/minimal/deploy/project.ext
-jboss/server/all/log/*.log
-jboss/server/all/tmp/**/*
-jboss/server/all/data/**/*
-jboss/server/all/work/**/*
-jboss/server/default/log/*.log
-jboss/server/default/tmp/**/*
-jboss/server/default/data/**/*
-jboss/server/default/work/**/*
-jboss/server/minimal/log/*.log
-jboss/server/minimal/tmp/**/*
-jboss/server/minimal/data/**/*
-jboss/server/minimal/work/**/*
-
-# deployed package files #
-
-*.DEPLOYED
-=======
 ### Java template
 *.class
 
@@ -26,7 +5,7 @@ jboss/server/minimal/work/**/*
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
 
@@ -64,8 +43,10 @@ hs_err_pid*
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
 *.iml
+*.ipr
+*.iws
+/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -112,6 +93,5 @@ buildNumber.properties
 .classpath
 .settings
 .metadata
-.svn
 # 忽略bin文件和bin目录
 bin
