@@ -9,23 +9,19 @@ public class Outer {
         System.out.println("load out class");
     }
 
-    public class Inner{
-/*        static {
+    public static class Inner{
+        static {
             System.out.println("load inner class...");
         }
 
         static void innerMethod(){
             System.out.println("static inner method...");
-        }*/
-
-        public Inner(){
-            System.out.println("load inenr class...");
         }
     }
 
     public static void main(String[] args) {
         Outer outer = new Outer();
         System.out.println("==========分割线========== ");
-        //Outer.Inner.innerMethod();
+        Outer.Inner.innerMethod();
     }
 }
