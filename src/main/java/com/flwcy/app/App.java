@@ -4,6 +4,9 @@ import com.flwcy.decorator.Drink;
 import com.flwcy.decorator.MilkyTea;
 import com.flwcy.decorator.Pearl;
 import com.flwcy.decorator.RedBeans;
+import com.flwcy.proxy.Agency;
+import com.flwcy.proxy.Landlord;
+import com.flwcy.proxy.Renter;
 import com.flwcy.singleton.InternalSingleton;
 import com.flwcy.singleton.Outer;
 
@@ -15,6 +18,10 @@ public class App
 {
     public static void main( String[] args )
     {
+        // decoratorTest();
+    }
+
+    public static void decoratorTest(){
         System.out.println( "组合优于继承" );
         // 做一杯奶茶
         Drink milkyTea = new MilkyTea();
