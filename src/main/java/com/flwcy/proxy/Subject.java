@@ -4,7 +4,7 @@ package com.flwcy.proxy;
  * 抽象角色（租房子）
  *
  */
-public interface Tenement {
+public interface Subject {
 
     public void tenement();
 }
