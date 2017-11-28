@@ -8,7 +8,7 @@ public class ProxySubject implements Subject {
     /**
      * 真实角色（网民）
      */
-    private Subject user; //代理角色内部持有真实角色的引用
+    private Subject user = new RealSubject(); //代理角色内部持有真实角色的引用
 
     public void requestFacebook() {
         // 获取Facebook的数据（真实角色操作之前所附加的操作）
