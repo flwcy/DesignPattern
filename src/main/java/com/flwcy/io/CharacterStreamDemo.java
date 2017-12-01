@@ -10,18 +10,27 @@ public class CharacterStreamDemo {
         new CharacterStreamDemo().write(new File("E:/20160407185.txt"), new File("E:/404_temp.txt"));
     }
 
+    /**
+     * 字符流
+     * 读使用BufferReader
+     * 写使用PrinterWriter
+     * @param file
+     * @param sourceFile
+     */
     public void write(File file,File sourceFile){
-        BufferedReader reader = null;
-        PrintWriter writer = null;
         if(file.exists()){
+            BufferedReader reader = null;
+            PrintWriter writer = null;
+
             try {
                 reader = new BufferedReader(new FileReader(file));
-                writer = new PrintWriter(new FileWriter(sourceFile));
+                // 使用文件字符流写文件，加上缓冲流提高效率，写用PrintWriter
+                writer = new PrintWriter(new BufferedWriter(new FileWriter(sourceFile)));
                 String str = null;
                 while ((str = reader.readLine()) != null){
                     writer.println(str);
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 if(writer != null)

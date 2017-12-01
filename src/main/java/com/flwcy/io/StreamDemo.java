@@ -1,16 +1,13 @@
 package com.flwcy.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * IO流复习
  */
 public class StreamDemo {
     public static void main(String[] args) {
-        new StreamDemo().read(new File("E:/404.txt"));
+        //new StreamDemo().read(new File("E:/404.txt"));
         new StreamDemo().write(new File("E:/404.txt"), new File("E:/404_temp.txt"));
     }
 
@@ -21,24 +18,28 @@ public class StreamDemo {
      */
     public void read(File file) {
         if (file.exists()) {
-            //创建流
-            FileInputStream fileInputStream = null;
+            // 定义流
+            FileInputStream in = null;
             try {
                 // 创建流
-                fileInputStream = new FileInputStream(file);
-                // 定义字节数组
+                in = new FileInputStream(file);
+                // 创建一个字节数组来存储读取的数据
                 byte[] b = new byte[1024];
-                int len = 0;
-                while ((len = fileInputStream.read(b)) != -1) {
-                    System.out.write(b);
+                // 使用一个整数len来表示读取的长度
+                int len = -1;
+                // 循环读取数据，只要len大于0说明读取到元素，可以直接对元素进行操作
+                while((len = in.read(b)) > 0){
+                    System.out.write(b,0,len);
                 }
-            } catch (Exception e) {
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                // 关闭流，释放资源
                 try {
-                    if (fileInputStream != null)
-                        fileInputStream.close();
+                    //读取完成后使用close方法关闭流
+                    if(in != null)
+                        in.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -52,30 +53,43 @@ public class StreamDemo {
      */
     public void write(File file, File sourceFile) {
         if (file.exists()) {
-            FileInputStream fileInputStream = null;
-            FileOutputStream fileOutputStream = null;
+           FileInputStream in = null;
+           FileOutputStream out = null;
+
             try {
-                fileInputStream = new FileInputStream(file);
-                fileOutputStream = new FileOutputStream(sourceFile);
-                // 读取文件
-                byte[] b = new byte[1024];
-                int len = 0;
-                while ((len = fileInputStream.read(b)) != -1) {
-                    fileOutputStream.write(b, 0, len);
+                in = new FileInputStream(file);
+                // 创建一个文件输出流
+                out = new FileOutputStream(sourceFile);
+                byte[] b = new byte[1034];
+                int len = -1;
+                // 将数据通过输入流读取到程序中
+                while((len = in.read(b)) > 0){
+                    // 将数据通过输出流输出，此时是一个文件输出流，就把数据输出到文件中
+                    out.write(b,0,len);
                 }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                //关闭流
                 try {
-                    if (fileOutputStream != null)
-                        fileOutputStream.close();
+                    if(out != null)
+                    {
+                        out.close();
+                    }
                 } catch (IOException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
                 try {
-                    if (fileInputStream != null)
-                        fileInputStream.close();
+                    if(in != null)
+                    {
+                        in.close();
+                    }
                 } catch (IOException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
