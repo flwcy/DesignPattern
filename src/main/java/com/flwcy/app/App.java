@@ -1,9 +1,9 @@
 package com.flwcy.app;
 
-import com.flwcy.decorator.Drink;
-import com.flwcy.decorator.MilkyTea;
-import com.flwcy.decorator.Pearl;
-import com.flwcy.decorator.RedBeans;
+import com.flwcy.decorator.Cake;
+import com.flwcy.decorator.Chocolate;
+import com.flwcy.decorator.Cream;
+import com.flwcy.decorator.Pastry;
 import com.flwcy.singleton.InternalSingleton;
 
 /**
@@ -14,20 +14,13 @@ public class App
 {
     public static void main( String[] args )
     {
-        // decoratorTest();
-    }
-
-    public static void decoratorTest(){
-        System.out.println( "组合优于继承" );
-        // 做一杯奶茶
-        Drink milkyTea = new MilkyTea();
-        System.out.println(milkyTea.make());
-        Pearl pearl = new Pearl(milkyTea);
-        // 加珍珠的奶茶
-        System.out.println(pearl.make());
-        // 加红豆的奶茶
-        System.out.println(new RedBeans(pearl).make());
-
-        InternalSingleton instance = InternalSingleton.getInstance();
+        // 一个蛋糕
+        Pastry cake = new Cake();
+        System.out.println(cake.make());
+        // 一个奶油蛋糕
+        Pastry creamCake = new Cream(new Cake());
+        System.out.println(creamCake.make());
+        Pastry chocolateCake = new Chocolate(new Cream(new Cake()));
+        System.out.println(chocolateCake.make());
     }
 }

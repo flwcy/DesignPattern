@@ -1,18 +1,21 @@
 package com.flwcy.decorator;
 
 /**
+ * 装饰(Decorator)角色
  * 为了满足开闭原则
- * 调料
+ * 配料
  */
-public abstract class Stuff implements Drink {
-    private Drink drink;
-    public Stuff(Drink drink){
-        this.drink = drink;
+public abstract class Stuff implements Pastry {
+
+    private Pastry pastry;
+
+    public Stuff(Pastry pastry){
+        this.pastry = pastry;
     }
+
+    protected abstract String stuffName();
 
     public String make(){
-        return String.format("%s,加了%s",drink.make(),stuffName());
+        return String.format("%s%s",stuffName(),pastry.make());
     }
-
-     abstract String stuffName();
 }
