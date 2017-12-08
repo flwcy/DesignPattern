@@ -1,6 +1,10 @@
 package com.flwcy.dynamicproxy;
 
+import sun.misc.ProxyGenerator;
+
+import java.io.*;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
 
 /**
@@ -28,5 +32,36 @@ public class Client {
 
         subject.request();
         System.out.println(subject.sayHello("flwcy"));
+
+        // 将生成的字节码保存到本地
+        createProxyClass(realSubject.getClass().getInterfaces());
+    }
+
+    private static void createProxyClass(Class<?>[] interfaces){
+        String proxyName = "ProxySubject";
+        BufferedOutputStream out = null;
+        File file = new File(String.format("E:/tmp/%s.class",proxyName));
+
+                    /*
+             * Generate the specified proxy class.
+             */
+        byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
+                proxyName, interfaces, Modifier.PUBLIC);
+
+        try {
+            out = new BufferedOutputStream(new FileOutputStream(file));
+            out.write(proxyClassFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(out != null)
+                    out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
